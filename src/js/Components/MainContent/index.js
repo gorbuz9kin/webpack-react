@@ -10,6 +10,7 @@ export default class MainContent extends Component {
 			<main>
 				<div className="main__container">
 					<p>Maincontent</p>
+					<img src="./images/react_logo_small.jpg" alt="alt"/>
 				</div>
 			</main>
 		)

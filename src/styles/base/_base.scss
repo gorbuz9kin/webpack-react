@@ -15,7 +15,7 @@ body {
 input {
 	required: valid;
 	outline: none;
-	//.transition(0.5s)
+	@include transition(0.5s);
 	&:focus {
 		required: invalid;
 	}
@@ -33,7 +33,7 @@ textarea {
 button,
 input[type='submit'] {
 	cursor: pointer;
-	//transition(0.5s)
+	@include transition(0.5s);
 	background: transparent;
 	border: 1px solid $base-text-color;
 	&:focus,
@@ -46,7 +46,7 @@ a {
 	text-decoration: none;
 	color: $base-text-color;
 	cursor: pointer;
-	//transition(0.5s)
+	@include transition(0.5s);
 	&:hover {
 		text-decoration: none;
 	}

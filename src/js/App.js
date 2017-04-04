@@ -6,6 +6,8 @@ import Footer from './Components/Footer'
 
 import './../styles/style.scss'
 
+import './../images/favicon.ico'
+
 
 
 export default class App extends Component {

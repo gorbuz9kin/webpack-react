@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const outputPath = path.resolve(__dirname, './dist')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const webpackConfig = {
 	entry: {
@@ -13,6 +14,7 @@ const webpackConfig = {
 		path: path.resolve(__dirname, './dist'),
 		filename: '[name].js'
 	},
+	devtool: 'cheap-eval-source-map',
 	module: {
 		rules: [
 			{
@@ -29,17 +31,16 @@ const webpackConfig = {
 			{
 				test: /\.scss$/,
 				exclude: /node_modules/,
-				use: [
-					'style-loader',
-					'css-loader',
-					'sass-loader'
-				]
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader', 'sass-loader']
+				})
 			},
 			{
-				test: /\.(gif|png|jpg|jpeg|svg)$/,
+				test: /\.(gif|png|jpg|jpeg|svg|ico)$/,
 				exclude: /node_modules/,
 				include: path.resolve(__dirname, './src/images/'),
-				use: 'url-loader?limit=10000&name=images/[name]-[hash].[ext]'
+				use: 'file-loader?name=images/[name].[ext]'
 			}
 		]
 	},
@@ -47,10 +48,12 @@ const webpackConfig = {
 		new HtmlWebpackPlugin({
 			template: path.join(__dirname, './src/index.html'),
 			filename: 'index.html',
+			favicon: './src/images/favicon.ico',
 			path: outputPath
 		}),
 		new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new ExtractTextPlugin('./css/main.css'),
 	],
 	devServer: {
 		contentBase: path.resolve(__dirname, './dist'),
