@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 
+import './../styles/style.scss'
+
 import Header from './Components/Header'
 import MainContent from './Components/MainContent'
 import Footer from './Components/Footer'
-
-import './../styles/style.scss'
-
-import './../images/favicon.ico'
 
 
 
