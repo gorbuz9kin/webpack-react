@@ -15,19 +15,13 @@ const webpackConfig = {
 		path: path.resolve(__dirname, './dist'),
 		filename: '[name].js'
 	},
-	devtool: 'cheap-eval-source-map',
+	devtool: 'cheap-module-eval-source-map',
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				enforce: 'pre',
-				use: 'eslint-loader'
-			},
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				use: 'babel-loader'
+				use: ['babel-loader', 'eslint-loader']
 			},
 			{
 				test: /\.scss$/,
@@ -70,12 +64,32 @@ const webpackConfig = {
 		}),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
-		new ExtractTextPlugin('./css/main.css'),
+		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
+		new ExtractTextPlugin('./main.css'),
 		new webpack.LoaderOptionsPlugin({
 			minimize: true,
+			debug: false,
 			options: {
 				postcss: [autoprefixer]
 			}
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+				screw_ie8: true,
+				conditionals: true,
+				unused: true,
+				comparisons: true,
+				sequences: true,
+				dead_code: true,
+				evaluate: true,
+				if_return: true,
+				join_vars: true,
+			},
+			output: {
+				comments: false,
+			},
 		})
 	],
 	devServer: {
