@@ -2,7 +2,8 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const outputPath = path.resolve(__dirname, './dist')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 
 const webpackConfig = {
 	entry: {
@@ -33,7 +34,23 @@ const webpackConfig = {
 				exclude: /node_modules/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: ['css-loader', 'sass-loader']
+					use: [
+						{
+							loader: 'css-loader',
+							// options: {
+							// 	sourceMap: true
+							// }
+						},
+						{
+							loader: 'sass-loader',
+							// options: {
+							// 	sourceMap: true
+							// }
+						},
+						{
+							loader: 'postcss-loader',
+						},
+					]
 				})
 			},
 			{
@@ -53,7 +70,13 @@ const webpackConfig = {
 		}),
 		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
-		new ExtractTextPlugin('./css/main.css'),
+		new ExtractTextPlugin('./main.css'),
+		new webpack.LoaderOptionsPlugin({
+			minimize: true,
+			options: {
+				postcss: [autoprefixer]
+			}
+		})
 	],
 	devServer: {
 		contentBase: path.resolve(__dirname, './dist'),
