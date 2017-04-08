@@ -9,8 +9,7 @@ export default class MainContent extends Component {
 		return (
 			<main>
 				<div className="main__container">
-					<p>Maincontent</p>
-					<img src="./images/react_logo_small.jpg" alt="alt"/>
+					<h1>Home page</h1>
 				</div>
 			</main>
 		)

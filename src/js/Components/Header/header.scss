@@ -19,5 +19,8 @@
 		&:last-of-type {
 			margin-right: 0;
 		}
+		&.active {
+			color: #1cbee2;
+		}
 	}
 }

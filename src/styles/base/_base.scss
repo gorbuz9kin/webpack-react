@@ -56,10 +56,19 @@ li {
 	list-style: none;
 }
 
+main {
+	background: #ececec;
+}
+
 
 .main__container {
 	width: 100%;
 	max-width: 1300px;
+	min-height: calc(100vh - 100px - 100px);
 	padding: 0 15px;
 	margin: 0 auto;
+	h1 {
+		text-align: center;
+		padding: 20px;
+	}
 }
