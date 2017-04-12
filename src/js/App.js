@@ -14,20 +14,19 @@ import About from './Containers/About'
 
 
 export default class App extends Component {
-	render() {
-		return (
-			<Router>
-				<div>
-					<Header />
-					<Route exact path="/" component={Home} />
-					<Route path="/contacts" component={Contacts} />
-					<Route path="/company" component={Company} />
-					<Route path="/products" component={Products} />
-					<Route path="/services" component={Services} />
-					<Route path="/about" component={About} />
-					
-				</div>
-			</Router>
-		)
-	}
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Header />
+                    <Route exact path="/" component={Home} />
+                    <Route path="/contacts" component={Contacts} />
+                    <Route path="/company" component={Company} />
+                    <Route path="/products" component={Products} />
+                    <Route path="/services" component={Services} />
+                    <Route path="/about" component={About} />
+                </div>
+            </Router>
+        )
+    }
 }
