@@ -1,19 +1,14 @@
-const webpack = require('webpack')
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const outputPath = path.resolve(__dirname, './dist')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
-const webpackConfig = {
-    entry: {
-        app: [
-            path.resolve(__dirname, './src/js/index.js')
-        ]
-    },
+module.exports = {
+    entry: './src/js/index.js',
     output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: '[name].js'
+        path: path.resolve(__dirname, "dist"),
+        filename: 'app-bundle.js'
     },
     devtool: 'cheap-module-eval-source-map',
     module: {
@@ -64,10 +59,8 @@ const webpackConfig = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, './src/index.html'),
-            filename: 'index.html',
-            favicon: './src/images/favicon.ico',
-            path: outputPath
+            template: 'src/index.html',
+            favicon: 'src/images/favicon.ico'
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
@@ -98,15 +91,5 @@ const webpackConfig = {
                 comments: false,
             },
         })
-    ],
-    devServer: {
-        contentBase: path.resolve(__dirname, './dist'),
-        port: 8080,
-        historyApiFallback: true,
-        inline: true,
-        hot: true,
-        host: '0.0.0.0'
-    }
+    ]
 }
-
-module.exports = webpackConfig
